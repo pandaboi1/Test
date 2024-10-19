@@ -1,0 +1,88 @@
+<html>
+
+<head>
+<title>Incredibly Simple Shopping</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="/main.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="pb-2 mt-4 mb-2 border-bottom">
+	<h1><%=items.name%></h1>
+	<p>(<a href="/items">back</a>)</p>
+</div>
+
+<div class="row"> 	
+	<div class="col-4">
+		<img class="img-fluid" src="%=items.img_url%">
+	</div>
+
+	<div class="col-4">
+		<div>Occasionally rabid, but always there for you.</div>
+		<div><em>$<%=items.price%></em></div>
+	</div>
+</div>
+
+<div class="row my-4">
+	<div class="col-8">
+		<h3>Reviews</h3>
+		<div class="card w-100 mt-3">
+			<div class="card-body">
+				<%if (locals.error) { %>
+					<div class="alert alert-danger" role="alert">
+						A simple danger alert—check it out!
+						<%=error%>
+					  </div>
+				<% } %>
+
+				<form action="/item_view_response/:items.id" method="POST">
+					<div class="form-group">
+						<label>Add your review!</label>
+					 	<input class="form-control mb-1" placeholder="Name"/>
+					 </div>
+					 <div class="form-group">
+						<textarea class="form-control mb-1" placeholder="Review"></textarea>
+					 </div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+		<% for (let [i, item] of items.entries()) { %>
+			<div class="card w-100 mt-3">
+				<div class="card-header" href="/item_view/<%=i%>">
+					<em><%=item.author%></em>
+				</div>
+
+				<div class="card-body">
+					<p>I get a new one of these every week! They're great.</p>
+				</div>
+			</div>
+		<% } %>
+
+		<div class="card w-100 mt-3">
+			<div class="card-header">
+				<em>horace</em>
+			</div>
+
+			<div class="card-body">
+				<p>HELP! They're chewing through thhshshssseasv nevr mnd u go away al gud her yum yum yum</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+</body>
+
+</html>
